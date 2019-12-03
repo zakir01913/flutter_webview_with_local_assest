@@ -37,16 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,33 +49,28 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasData) {
               return InAppWebView(
-//                initialUrl: new Uri.dataFromString(
-//                  snapshot.data,
-//                  mimeType: 'text/html',
-//                  encoding: Encoding.getByName("UTF-8"),
-//                ).toString(),
                 initialUrl: "http://localhost:8080/assets/dotmobile_teaser_screens/index.html",
                 initialOptions: InAppWebViewWidgetOptions(
                     inAppWebViewOptions: InAppWebViewOptions(
                       debuggingEnabled: true,
                     )
-                ),// maybe you Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName("UTF-8")).toString()
+                ),
               );
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
             return CircularProgressIndicator();
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
   Future<String> loadLocal() async {
     return await rootBundle
         .loadString('assets/dotmobile_teaser_screens/index.html');
+  }
+  @override
+  void dispose() {
+    localhostServer.close();
+    super.dispose();
   }
 }
