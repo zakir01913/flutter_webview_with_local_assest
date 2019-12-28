@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappbrowser/flutter_inappbrowser.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 InAppLocalhostServer localhostServer = new InAppLocalhostServer();
 
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasData) {
               return InAppWebView(
-                initialUrl: "http://localhost:8080/assets/dotmobile_teaser_screens/index.html",
+                initialUrl: "http://localhost:8080/assets/index.html",
                 initialOptions: InAppWebViewWidgetOptions(
                     inAppWebViewOptions: InAppWebViewOptions(
                       debuggingEnabled: true,
@@ -66,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<String> loadLocal() async {
     return await rootBundle
-        .loadString('assets/dotmobile_teaser_screens/index.html');
+        .loadString('assets/index.html');
   }
   @override
   void dispose() {
