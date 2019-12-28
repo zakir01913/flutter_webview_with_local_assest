@@ -76,13 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_inappbrowser:
+  flutter_inappwebview:
     dependency: "direct main"
     description:
-      name: flutter_inappbrowser
+      name: flutter_inappwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

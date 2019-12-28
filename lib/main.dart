@@ -1,9 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_inappbrowser/flutter_inappbrowser.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 InAppLocalhostServer localhostServer = new InAppLocalhostServer();
 
@@ -43,30 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: FutureBuilder<String>(
-          future: loadLocal(),
-          builder: (BuildContext context, snapshot) {
-            if (snapshot.hasData) {
-              return InAppWebView(
-                initialUrl: "http://localhost:8080/assets/index.html",
-                initialOptions: InAppWebViewWidgetOptions(
-                    inAppWebViewOptions: InAppWebViewOptions(
-                      debuggingEnabled: true,
-                    )
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-            return CircularProgressIndicator();
-          }),
+      body: InAppWebView(
+        initialUrl: "http://localhost:8080/assets/index.html",
+        initialOptions: InAppWebViewWidgetOptions(
+            inAppWebViewOptions: InAppWebViewOptions(
+              debuggingEnabled: true,
+            )
+        ),
+      ),
     );
   }
 
-  Future<String> loadLocal() async {
-    return await rootBundle
-        .loadString('assets/index.html');
-  }
   @override
   void dispose() {
     localhostServer.close();
